@@ -1,5 +1,4 @@
-
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "@/components/layout/Navbar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,6 +8,30 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 
 const SellPage = () => {
+  const [images, setImages] = useState<File[]>([]);
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length > 10) {
+      toast.error("Maximum 10 images allowed");
+      return;
+    }
+
+    const validFiles = files.filter(file => {
+      const isValid = file.size <= 2 * 1024 * 1024 && ['image/jpeg', 'image/png'].includes(file.type);
+      if (!isValid) {
+        toast.error(`${file.name} is invalid. Images must be JPG/PNG and max 2MB`);
+      }
+      return isValid;
+    });
+
+    setImages(prevImages => [...prevImages, ...validFiles].slice(0, 10));
+  };
+
+  const removeImage = (index: number) => {
+    setImages(prevImages => prevImages.filter((_, i) => i !== index));
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     toast.success("Property listing submitted successfully! Our team will review and get back to you shortly.");
@@ -173,10 +196,45 @@ const SellPage = () => {
                   
                   <div>
                     <label className="block text-sm font-medium mb-3">Upload Images</label>
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                      <p className="text-gray-500 mb-2">Drag and drop image files here, or click to select files</p>
-                      <p className="text-xs text-gray-400">Max 10 images, 2MB each (JPG, PNG)</p>
-                      <Button type="button" variant="outline" className="mt-4">Select Files</Button>
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-6">
+                      <input
+                        type="file"
+                        multiple
+                        accept="image/jpeg,image/png"
+                        onChange={handleImageUpload}
+                        className="hidden"
+                        id="image-upload"
+                      />
+                      <label htmlFor="image-upload" className="cursor-pointer">
+                        <div className="text-center">
+                          <p className="text-gray-500 mb-2">Drag and drop image files here, or click to select files</p>
+                          <p className="text-xs text-gray-400">Max 10 images, 2MB each (JPG, PNG)</p>
+                          <Button type="button" variant="outline" className="mt-4">
+                            Select Files
+                          </Button>
+                        </div>
+                      </label>
+                      
+                      {images.length > 0 && (
+                        <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                          {images.map((file, index) => (
+                            <div key={index} className="relative group">
+                              <img
+                                src={URL.createObjectURL(file)}
+                                alt={`Upload ${index + 1}`}
+                                className="w-full h-24 object-cover rounded"
+                              />
+                              <button
+                                type="button"
+                                onClick={() => removeImage(index)}
+                                className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                              >
+                                ✕
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                   
