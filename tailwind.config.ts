@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Real estate specific colors
+				realestate: {
+					'blue': '#1A365D',
+					'gold': '#D4AF37',
+					'light-gold': '#F2D680',
+					'dark-blue': '#0F172A',
+					'light-blue': '#EEF2F6',
+					'gray': '#64748B'
 				}
 			},
 			borderRadius: {
@@ -84,11 +94,35 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+					},
+					'100%': {
+						opacity: '1',
+					},
+				},
+				'fade-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					},
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.5s ease-out',
+				'fade-up': 'fade-up 0.7s ease-out'
+			},
+			fontFamily: {
+				'playfair': ['"Playfair Display"', 'serif'],
+				'poppins': ['Poppins', 'sans-serif']
 			}
 		}
 	},
