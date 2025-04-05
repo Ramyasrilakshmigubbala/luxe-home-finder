@@ -48,16 +48,22 @@ const Navbar = () => {
 
         {/* Right Side Actions */}
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="icon" as={Link} to="/listings">
-            <Search className="h-5 w-5" />
-          </Button>
-          <Button variant="outline" className="hidden md:flex" as={Link} to="/login">
-            <User className="h-4 w-4 mr-2" />
-            Login
-          </Button>
-          <Button className="hidden md:flex bg-realestate-blue hover:bg-realestate-blue/90" as={Link} to="/signup">
-            Sign Up
-          </Button>
+          <Link to="/listings">
+            <Button variant="ghost" size="icon">
+              <Search className="h-5 w-5" />
+            </Button>
+          </Link>
+          <Link to="/login" className="hidden md:block">
+            <Button variant="outline" className="flex items-center">
+              <User className="h-4 w-4 mr-2" />
+              Login
+            </Button>
+          </Link>
+          <Link to="/signup" className="hidden md:block">
+            <Button className="bg-realestate-blue hover:bg-realestate-blue/90">
+              Sign Up
+            </Button>
+          </Link>
           
           {/* Mobile Menu */}
           <DropdownMenu>
@@ -90,6 +96,9 @@ const Navbar = () => {
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link to="/login" className="w-full">Login</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/signup" className="w-full">Sign Up</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
