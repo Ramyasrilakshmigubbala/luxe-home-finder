@@ -48,14 +48,14 @@ const Navbar = () => {
 
         {/* Right Side Actions */}
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" as={Link} to="/listings">
             <Search className="h-5 w-5" />
           </Button>
-          <Button variant="outline" className="hidden md:flex">
+          <Button variant="outline" className="hidden md:flex" as={Link} to="/login">
             <User className="h-4 w-4 mr-2" />
             Login
           </Button>
-          <Button className="hidden md:flex bg-realestate-blue hover:bg-realestate-blue/90">
+          <Button className="hidden md:flex bg-realestate-blue hover:bg-realestate-blue/90" as={Link} to="/signup">
             Sign Up
           </Button>
           

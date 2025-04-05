@@ -9,6 +9,11 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import ListingsPage from "./pages/ListingsPage";
 import PropertyDetail from "./pages/PropertyDetail";
+import SellPage from "./pages/SellPage";
+import AgentsPage from "./pages/AgentsPage";
+import BlogPage from "./pages/BlogPage";
+import ContactPage from "./pages/ContactPage";
+import AuthPage from "./pages/AuthPage";
 
 // Create a new QueryClient instance
 const queryClient = new QueryClient();
@@ -26,6 +31,12 @@ const App: React.FC = () => {
               <Route path="/" element={<Index />} />
               <Route path="/listings" element={<ListingsPage />} />
               <Route path="/property/:id" element={<PropertyDetail />} />
+              <Route path="/sell" element={<SellPage />} />
+              <Route path="/agents" element={<AgentsPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/login" element={<AuthPage />} />
+              <Route path="/signup" element={<AuthPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
